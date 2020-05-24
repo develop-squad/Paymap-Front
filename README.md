@@ -1,4 +1,4 @@
-# Paymap (paymap)
+# Paymap (paymap-front)
 
 A Quasar Framework app
 

@@ -1,14 +1,21 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
+    <Map
+      v-bind:lat="126.973622"
+      v-bind:lng="37.563219"
+      v-bind:zoom="17"
+    />
   </q-page>
 </template>
 
 <script>
+import Map from 'components/Map'
+
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+
+  components: {
+    Map
+  }
 }
 </script>

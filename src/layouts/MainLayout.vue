@@ -1,7 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="layout">
     <div class="top-card">
-      상단바
+       <q-form class="top-card__input" @submit="onSearch">
+          <q-input filled v-model="search" />
+          <q-btn flat label="검색" @click="onSearch"/>
+        </q-form>
     </div>
 
     <div class="content">
@@ -16,7 +19,17 @@
 
 <script>
 export default {
-  name: "MainLayout"
+  name: "MainLayout",
+  data () {
+    return {
+      search: ""
+    }
+  },
+  methods: {
+    onSearch () {
+      console.log("Search", this.search)
+    }
+  }
 }
 </script>
 
@@ -25,7 +38,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .top-card {
+  .top-card, .bottom-card  {
     z-index: 1;
     background-color: white;
     margin: 10px;
@@ -38,11 +51,19 @@ export default {
     left: 0;
   }
 
-  .bottom-card {
-    z-index: 1;
-    background-color: white;
-    margin: 10px;
-    padding: 10px;
+  .top-card {
+    &__input{
+      display: flex;
+      justify-content: space-between;
+
+      label {
+        width: 78%;
+      }
+
+      button {
+        width: 20%;
+      }
+    }
   }
 }
 </style>

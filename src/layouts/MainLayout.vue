@@ -38,6 +38,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   .top-card, .bottom-card  {
     z-index: 1;
     background-color: white;

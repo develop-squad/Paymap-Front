@@ -19,3 +19,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.map {
+  background-color: greenyellow;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+</style>

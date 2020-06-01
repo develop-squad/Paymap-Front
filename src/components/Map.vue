@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Map',
+  name: "Map",
   props: {
     lat: Number,
     lng: Number,
@@ -34,7 +34,7 @@ export default {
       zoom: this.zoom
     }
     // let map = new naver.maps.Map('map', initOptions)
-    this.map = new window.naver.maps.Map('map', options)
+    this.map = new window.naver.maps.Map("map", options)
   }
 }
 </script>

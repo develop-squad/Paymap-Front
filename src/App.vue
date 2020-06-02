@@ -13,5 +13,6 @@ export default {
 <style lang="scss">
 body {
   overflow: hidden;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 </style>

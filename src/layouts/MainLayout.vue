@@ -56,6 +56,9 @@ export default {
   }
 
   .top-card {
+    //border-radius: 30px;
+    background: linear-gradient( to right, #64fd31, #2Db400 );
+    color: white;
     &__input{
       padding: 10px;
       display: flex;

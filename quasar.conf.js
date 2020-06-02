@@ -52,7 +52,8 @@ module.exports = function(/* ctx */) {
       plugins: [],
       components: [
         "QInput",
-        "QBtn"
+        "QBtn",
+        "QSlideTransition"
       ]
     },
 

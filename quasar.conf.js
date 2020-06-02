@@ -50,20 +50,15 @@ module.exports = function(/* ctx */) {
 
       // Quasar plugins
       plugins: [],
-      components: ["QInput"]
+      components: [
+        "QInput",
+        "QBtn"
+      ]
     },
 
-    // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
     supportIE: false,
-
-    // https://quasar.dev/quasar-cli/cli-documentation/supporting-ts
     supportTS: false,
-
-    // https://quasar.dev/quasar-cli/cli-documentation/prefetch-feature
-    // preFetch: true
-
-    // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
-    build: {
+      build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
 
       // rtl: false, // https://quasar.dev/options/rtl-support

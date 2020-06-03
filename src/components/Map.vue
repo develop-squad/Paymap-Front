@@ -31,7 +31,12 @@ export default {
   mounted () {
     const options = {
       center: new window.naver.maps.LatLng(this.lat, this.lng),
-      zoom: this.zoom
+      zoom: this.zoom,
+      zoomControl: true,
+      zoomControlOptions: {
+        style: window.naver.maps.ZoomControlStyle.LARGE,
+        position: window.naver.maps.Position.RIGHT_CENTER
+      }
     }
     // let map = new naver.maps.Map('map', initOptions)
     this.map = new window.naver.maps.Map("map", options)

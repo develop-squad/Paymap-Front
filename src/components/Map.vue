@@ -25,6 +25,9 @@ export default {
   },
 
   methods: {
+    onClickMap () {
+      this.$parent.$parent.$parent.topCardOpened = !this.$parent.$parent.$parent.topCardOpened
+    },
     drawMap () {
       const options = {
         center: new window.naver.maps.LatLng(this.lat, this.lng),

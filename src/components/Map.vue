@@ -38,10 +38,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.map {
-  width: 100%;
-  min-height: inherit;
-}
-</style>

@@ -20,8 +20,9 @@ export default {
     }
   },
   mounted () {
-    this.getGeolocation()
+    this.setCenterToGeolocation()
     this.drawMap()
+    window.naver.maps.Event.once(this.map, "init_stylemap", this.addCustomControls)
   },
 
   methods: {
@@ -40,11 +41,19 @@ export default {
       }
       this.map = new window.naver.maps.Map("map", options)
     },
+    addCustomControls () {
+      const locationButtonHtml = "<a href=\"#\" class=\"btn-location\"><span class=\"ico-location\">접속위치</span></a>"
+      const locationButton = new window.naver.maps.CustomControl(locationButtonHtml, {
+        position: window.naver.maps.Position.RIGHT_CENTER
+      })
+      locationButton.setMap(this.map)
+      window.naver.maps.Event.addDOMListener(locationButton.getElement(), "click", this.setCenterToGeolocation)
+    },
     updatePosition (position) {
       const center = new window.naver.maps.LatLng(position.coords.latitude, position.coords.longitude)
       this.map.setCenter(center)
     },
-    getGeolocation () {
+    setCenterToGeolocation () {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.updatePosition)
       }

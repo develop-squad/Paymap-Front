@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.f62878705495827ad1d541bbb1af81f8.js"
+  "precache-manifest.2828eadb4f4b15496f4f2c2b5eacb204.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "paymap-front"});

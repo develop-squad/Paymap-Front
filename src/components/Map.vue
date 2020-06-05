@@ -35,7 +35,7 @@ export default {
         zoom: this.zoom,
         zoomControl: true,
         zoomControlOptions: {
-          style: window.naver.maps.ZoomControlStyle.LARGE,
+          style: window.naver.maps.ZoomControlStyle.SMALL,
           position: window.naver.maps.Position.RIGHT_CENTER
         }
       }

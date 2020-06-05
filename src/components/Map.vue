@@ -22,7 +22,7 @@ export default {
   mounted () {
     this.setCenterToGeolocation()
     this.drawMap()
-    window.naver.maps.Event.once(this.map, "init_stylemap", this.addCustomControls)
+    window.naver.maps.Event.once(this.map, "init_stylemap", this.mapInit)
   },
 
   methods: {
@@ -36,18 +36,20 @@ export default {
         zoomControl: true,
         zoomControlOptions: {
           style: window.naver.maps.ZoomControlStyle.SMALL,
-          position: window.naver.maps.Position.RIGHT_CENTER
+          position: window.naver.maps.Position.RIGHT_BOTTOM
         }
       }
       this.map = new window.naver.maps.Map("map", options)
     },
-    addCustomControls () {
+    mapInit () {
       const locationButtonHtml = "<a href=\"#\" class=\"btn-location\"><span class=\"ico-location\">접속위치</span></a>"
       const locationButton = new window.naver.maps.CustomControl(locationButtonHtml, {
-        position: window.naver.maps.Position.RIGHT_CENTER
+        position: window.naver.maps.Position.RIGHT_BOTTOM
       })
       locationButton.setMap(this.map)
       window.naver.maps.Event.addDOMListener(locationButton.getElement(), "click", this.setCenterToGeolocation)
+
+      locationButton.getElement().parentNode.parentNode.className = "control-wrapper"
     },
     updatePosition (position) {
       const center = new window.naver.maps.LatLng(position.coords.latitude, position.coords.longitude)

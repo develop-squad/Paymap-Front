@@ -55,5 +55,9 @@ export default {
       -webkit-background-size: 200px 200px;
     }
   }
+  .control-wrapper {
+    right: 4px !important;
+    bottom: 15px !important;
+  }
 }
 </style>

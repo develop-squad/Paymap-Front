@@ -26,12 +26,27 @@ export default {
   data () {
     return {
       search: "",
-      topCardOpened: true
+      topCardOpened: true,
+      iPhoneIndicatorCheck: null
     }
+  },
+  mounted () {
+    this.iPhoneXCheck()
   },
   methods: {
     onSearch () {
       console.log("Search", this.search)
+    },
+    iPhoneXCheck () {
+      if (navigator.userAgent.includes("iPhone")) {
+        var ratio = screen.height / screen.width
+        if (ratio > 2) {
+          // 홈 인디케이터 관련 스타일 추가
+          this.iPhoneIndicatorCheck = true
+        } else {
+          this.iPhoneIndicatorCheck = false
+        }
+      }
     }
   }
 }

@@ -4,6 +4,7 @@
       v-bind:lat="37.563219"
       v-bind:lng="126.973622"
       v-bind:zoom="16"
+      :style="mapHeight"
     />
   </div>
 </template>
@@ -15,13 +16,37 @@ export default {
   name: "PageIndex",
   components: {
     Map
+  },
+  data () {
+    return {
+      mapHeight: "height: 100vh;"
+    }
+  },
+  mounted () {
+    this.checkStyle()
+  },
+  methods: {
+    checkStyle () {
+      var checkParent = () => {
+        if (typeof this.$parent.$parent.iPhoneIndicatorCheck === "object") {
+          setTimeout(() => {
+            checkParent()
+          }, 50)
+        } else {
+          if (this.$parent.$parent.iPhoneIndicatorCheck) {
+            this.mapHeight = "height: calc(100vh - 22px);"
+          }
+        }
+      }
+
+      checkParent()
+    }
   }
 }
 </script>
 
 <style lang="scss">
 .map {
-  height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;

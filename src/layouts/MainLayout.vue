@@ -10,7 +10,7 @@
       </q-slide-transition>
 
     <div class="content">
-      <router-view />
+      <router-view ref="index" />
     </div>
 <!--
     <div class="bottom-card">

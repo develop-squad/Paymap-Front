@@ -59,6 +59,34 @@ export default {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.updatePosition)
       }
+    },
+    showMarker (name, lat, lng) {
+      const position = new window.naver.maps.LatLng(lat, lng)
+      const marker = new window.naver.maps.Marker({
+        map: this.map,
+        position: position
+      })
+      const infoWindow = new window.naver.maps.InfoWindow({
+        content: `<h4>${name}</h4>`,
+        minWidht: 100,
+        maxWidth: 140,
+        backgroundColor: "#eee",
+        borderColor: "#2db400",
+        borderWidth: 3,
+        anchorSize: new window.naver.maps.Size(30, 30),
+        anchorSkew: true,
+        anchorColor: "#eee",
+        pixelOffset: new window.naver.maps.Point(20, -20)
+      })
+      window.naver.maps.Event.addListener(marker, "click", e => {
+        if (infoWindow.getMap()) {
+          infoWindow.close()
+        } else {
+          infoWindow.open(this.map, marker)
+        }
+      })
+      this.map.setCenter(position)
+      console.log("marker created")
     }
   }
 }

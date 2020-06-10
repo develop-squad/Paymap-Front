@@ -1,6 +1,7 @@
 <template>
   <div>
     <Map
+      ref="map"
       v-bind:lat="37.563219"
       v-bind:lng="126.973622"
       v-bind:zoom="16"

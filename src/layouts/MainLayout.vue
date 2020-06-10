@@ -36,6 +36,7 @@ export default {
   methods: {
     onSearch () {
       console.log("Search", this.search)
+      this.$refs.index.$refs.map.showMarker("남산타워", 37.551241, 126.988167)
     },
     iPhoneXCheck () {
       if (navigator.userAgent.includes("iPhone")) {

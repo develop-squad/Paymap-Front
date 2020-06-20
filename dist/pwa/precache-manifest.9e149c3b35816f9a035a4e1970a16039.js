@@ -1,15 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b1ad573187ac7c85be3a",
-    "url": "css/2.64685219.css"
+    "revision": "37c725f2a912beb1c6f5",
+    "url": "css/2.423432db.css"
   },
   {
-    "revision": "48f50b5f9af78beef4ba",
+    "revision": "d89c4524928c7e694555",
     "url": "css/3.a99327f8.css"
   },
   {
-    "revision": "1382013eaf0f805177ff",
-    "url": "css/app.be5bf1ab.css"
+    "revision": "c5815b724f620413d67c",
+    "url": "css/app.375ae869.css"
   },
   {
     "revision": "5cb7edfceb233100075dc9a1e12e8da3",
@@ -44,87 +44,79 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.12a47ed5.woff2"
   },
   {
-    "revision": "754155973fb3b41a88824844c69a6993",
+    "revision": "f42aa3d2d4a77f58d909b4a142c27ad5",
     "url": "index.html"
   },
   {
-    "revision": "b1ad573187ac7c85be3a",
-    "url": "js/2.b1ad5731.js"
+    "revision": "37c725f2a912beb1c6f5",
+    "url": "js/2.37c725f2.js"
   },
   {
-    "revision": "48f50b5f9af78beef4ba",
-    "url": "js/3.48f50b5f.js"
+    "revision": "d89c4524928c7e694555",
+    "url": "js/3.d89c4524.js"
   },
   {
-    "revision": "e33b913e066dc5464c51",
-    "url": "js/4.e33b913e.js"
+    "revision": "a30d9da17762583981c4",
+    "url": "js/4.a30d9da1.js"
   },
   {
-    "revision": "1382013eaf0f805177ff",
-    "url": "js/app.89ecb4cb.js"
+    "revision": "c5815b724f620413d67c",
+    "url": "js/app.09f0542e.js"
   },
   {
-    "revision": "b22c7c9d74e255daf29b",
-    "url": "js/vendor.b22c7c9d.js"
+    "revision": "45170f90a26a88ccd49a",
+    "url": "js/vendor.45170f90.js"
   },
   {
-    "revision": "4a2760b2c53ecec567cb813322c4e3d3",
+    "revision": "54f237a127526db3385843e3d2d46962",
     "url": "manifest.json"
   },
   {
-    "revision": "c9920835d2adb9f6ab6a79a27f220a3a",
+    "revision": "86a4b2ef2db6b5c2d6edc1dbd23b3cfb",
     "url": "statics/icons/apple-icon-120x120.png"
   },
   {
-    "revision": "9df9e65a1d2c6df3bd9143666b0e8c63",
+    "revision": "3809bb76ba04c4054a0fb6b5d264c44d",
     "url": "statics/icons/apple-icon-152x152.png"
   },
   {
-    "revision": "4300c6c136c06abcd781aa18644dd7a3",
+    "revision": "ee406015a931961dbe1d5f5ab5d4dfac",
     "url": "statics/icons/apple-icon-167x167.png"
   },
   {
-    "revision": "88dbf3d9e8269f1298486d103e22a57c",
+    "revision": "0b99df9995c8aed6c0287910e4fcbf9c",
     "url": "statics/icons/apple-icon-180x180.png"
   },
   {
-    "revision": "1be07e62226c8f6a7086f132d9be1642",
-    "url": "statics/icons/favicon-128x128.png"
-  },
-  {
-    "revision": "df5ff7f4728c4ef4b951d46b4136906f",
+    "revision": "7edcac1a26fd9fc8a6c1cbbd6bf5d8d0",
     "url": "statics/icons/favicon-16x16.png"
   },
   {
-    "revision": "64aa9e88dd6545f64226c1e2230f66cc",
+    "revision": "fc9544e984af71ff5ee5134476eac623",
     "url": "statics/icons/favicon-32x32.png"
   },
   {
-    "revision": "d22664397060743b24e8956a5a3fcdec",
+    "revision": "6f2a2e5b68acb438972b8e99d6882563",
     "url": "statics/icons/favicon-96x96.png"
   },
   {
-    "revision": "8b9eb314ff597f6f7c7bf8c7a5f717ec",
-    "url": "statics/icons/favicon.ico"
-  },
-  {
-    "revision": "1be07e62226c8f6a7086f132d9be1642",
+    "revision": "48657e153768fd7df38841bf565f3101",
     "url": "statics/icons/icon-128x128.png"
   },
   {
-    "revision": "a1b423855a450ae7adbd9d2a782e0dfb",
+    "revision": "0a287f0334f4efddb701ab36a8f652c1",
     "url": "statics/icons/icon-192x192.png"
   },
   {
-    "revision": "9f33ebc999e51d0dc2975fc573d53a0b",
+    "revision": "07cb485958e3406a30933bf2e7c32808",
     "url": "statics/icons/icon-256x256.png"
   },
   {
-    "revision": "a126be0d50ed682c3129e0b8b31f680a",
+    "revision": "ab5a8349ee8c2db1cf6dc0298c8e4eba",
     "url": "statics/icons/icon-384x384.png"
   },
   {
-    "revision": "02abd24e7c8638e848d96a6bf78d2c27",
+    "revision": "5f832ae0f6da5cc3a181c2f5d1111560",
     "url": "statics/icons/icon-512x512.png"
   },
   {

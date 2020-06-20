@@ -104,7 +104,7 @@ module.exports = function(/* ctx */) {
       manifest: {
         name: "Paymap",
         short_name: "Paymap",
-        description: "A Quasar Framework app",
+        description: "ZeroPay Franchise Map",
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",

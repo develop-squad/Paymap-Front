@@ -45,7 +45,6 @@ module.exports = function(/* ctx */) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: "auto",
 
-      components: [],
       directives: [],
 
       // Quasar plugins
@@ -53,7 +52,8 @@ module.exports = function(/* ctx */) {
       components: [
         "QInput",
         "QBtn",
-        "QSlideTransition"
+        "QSlideTransition",
+        "QBtnDropdown"
       ]
     },
 
@@ -108,7 +108,7 @@ module.exports = function(/* ctx */) {
       manifest: {
         name: "Paymap",
         short_name: "Paymap",
-        description: "A Quasar Framework app",
+        description: "ZeroPay Franchise Map",
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",

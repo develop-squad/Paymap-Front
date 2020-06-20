@@ -50,16 +50,12 @@ module.exports = function(/* ctx */) {
 
       // Quasar plugins
       plugins: [],
-      components: [
-        "QInput",
-        "QBtn",
-        "QSlideTransition"
-      ]
+      components: ["QInput", "QBtn", "QSlideTransition", "QBtnDropdown"]
     },
 
     supportIE: false,
     supportTS: false,
-      build: {
+    build: {
       vueRouterMode: "hash", // available values: 'hash', 'history'
 
       // rtl: false, // https://quasar.dev/options/rtl-support

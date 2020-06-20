@@ -27,6 +27,8 @@ export default {
 
   methods: {
     onClickMap () {
+      // 지도 컴포넌트 터치가 아닌 다른 방식 생각해봐야 될 듯
+      // 지도 안에 뭐 누르기만 해도 실행되서 별로임
       this.$parent.$parent.$parent.topCardOpened = !this.$parent.$parent.$parent.topCardOpened
     },
     drawMap () {

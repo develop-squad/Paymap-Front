@@ -21,7 +21,7 @@
       </q-slide-transition>
 
     <div class="content">
-      <router-view />
+      <router-view ref="index" />
     </div>
 <!--
     <div class="bottom-card">
@@ -96,6 +96,7 @@ export default {
       this.type = type
       console.log(type)
       // api 호출
+      this.$refs.index.$refs.map.showMarkersByType(type)
     },
     iPhoneXCheck () {
       if (navigator.userAgent.includes("iPhone")) {

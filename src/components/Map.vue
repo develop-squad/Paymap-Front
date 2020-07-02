@@ -4,6 +4,9 @@
 </template>
 
 <script>
+import axios from "axios"
+import intersect from "@turf/intersect"
+
 export default {
   name: "Map",
   props: {
@@ -16,10 +19,23 @@ export default {
       /**
        * @type {naver.maps.Map}
        */
-      map: null
+      map: null,
+      markers: [],
+      regionData: {},
+      regionGeoData: {
+        features: {}
+      }
     }
   },
   mounted () {
+    axios.get("/statics/geodata/LAWDCD.json").then((response) => {
+      for (const datum of response.data) {
+        this.regionData[datum.LAWD_CD] = datum
+      }
+    })
+    axios.get("/statics/geodata/TL_SCCO_SIG.json").then((response) => {
+      this.regionGeoData = response.data
+    })
     this.setCenterToGeolocation()
     this.drawMap()
     window.naver.maps.Event.once(this.map, "init_stylemap", this.mapInit)
@@ -85,8 +101,73 @@ export default {
           infoWindow.open(this.map, marker)
         }
       })
-      this.map.setCenter(position)
-      console.log("marker created")
+      // this.map.setCenter(position)
+      this.markers.push(marker)
+    },
+    showMarkersByType (type) {
+      this.removeMarkers()
+
+      // 현재 지도에 보이는 영역
+      const bounds = this.map.getBounds()
+      const boundsGeoPolygon = {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "Polygon",
+          coordinates: [[
+            [bounds._min.x, bounds._min.y],
+            [bounds._max.x, bounds._min.y],
+            [bounds._max.x, bounds._max.y],
+            [bounds._min.x, bounds._max.y]
+          ]]
+        }
+      }
+      // 현재 지도에 보이는 지역(시/군/구)
+      const regionQueue = []
+      let intersection
+      for (const regionGeoPolygon of this.regionGeoData.features) {
+        intersection = intersect(boundsGeoPolygon, regionGeoPolygon)
+        if (intersection !== null) {
+          console.log(regionGeoPolygon.properties.SIG_KOR_NM)
+          regionQueue.push(this.regionData[regionGeoPolygon.properties.SIG_CD])
+        }
+      }
+      // 지역 내 가맹점 데이터 요청
+      const shopData = []
+      for (const region of regionQueue) {
+        axios.get("http://devx.kr:9991/zeropay", {
+          params: {
+            sido: region.SIDO_CD,
+            sigungu: region.SIGUNGU_CD,
+            type: type
+          }
+        }).then((response) => {
+          shopData.push(response.data)
+
+          // 가맹점 좌표 데이터 요청
+          for (const shop of response.data) {
+            const centerLng = this.map.getCenter().lng()
+            const centerLat = this.map.getCenter().lat()
+            axios.get("http://devx.kr:9991/geocode", {
+              params: {
+                address: shop.shop_address,
+                coordinate: centerLng + "," + centerLat
+              }
+            }).then((response) => {
+              const addresses = response.data.addresses
+              if (typeof addresses !== "undefined" && addresses.length > 0) {
+                this.showMarker(shop.shop_name, addresses[0].y, addresses[0].x)
+              }
+            })
+          }
+        })
+      }
+    },
+    removeMarkers () {
+      for (const marker of this.markers) {
+        marker.setMap(null)
+      }
+      this.markers = []
     }
   }
 }

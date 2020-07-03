@@ -91,6 +91,11 @@ export default {
     onSearch () {
       console.log("Search", this.search)
       // api 호출
+      let type = null
+      if (this.type !== "전체" && this.type !== "카테고리") {
+        type = this.type
+      }
+      this.$refs.index.$refs.map.showMarkersByQuery(this.search, type)
     },
     onClickType (type) {
       this.type = type

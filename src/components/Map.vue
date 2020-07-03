@@ -104,9 +104,60 @@ export default {
       // this.map.setCenter(position)
       this.markers.push(marker)
     },
+    onShopDataResponse (response) {
+      const centerLng = this.map.getCenter().lng()
+      const centerLat = this.map.getCenter().lat()
+      for (const shop of response.data) {
+        // 가맹점 좌표 데이터 요청
+        axios.get("http://devx.kr:9991/geocode", {
+          params: {
+            address: shop.shop_address,
+            coordinate: centerLng + "," + centerLat
+          }
+        }).then((response) => {
+          const addresses = response.data.addresses
+          if (typeof addresses !== "undefined" && addresses.length > 0) {
+            // 마커 활성화
+            this.showMarker(shop.shop_name, addresses[0].y, addresses[0].x)
+          }
+        })
+      }
+    },
+    showMarkersByQuery (query) {
+      this.removeMarkers()
+      const regionQueue = this.getCurrentRegions()
+      // 지역 내 가맹점 데이터 요청
+      for (const region of regionQueue) {
+        axios.get("http://devx.kr:9991/zeropay", {
+          params: {
+            sido: region.SIDO_CD,
+            sigungu: region.SIGUNGU_CD,
+            name: query
+          }
+        }).then(this.onShopDataResponse)
+      }
+    },
     showMarkersByType (type) {
       this.removeMarkers()
-
+      const regionQueue = this.getCurrentRegions()
+      // 지역 내 가맹점 데이터 요청
+      for (const region of regionQueue) {
+        axios.get("http://devx.kr:9991/zeropay", {
+          params: {
+            sido: region.SIDO_CD,
+            sigungu: region.SIGUNGU_CD,
+            type: type
+          }
+        }).then(this.onShopDataResponse)
+      }
+    },
+    removeMarkers () {
+      for (const marker of this.markers) {
+        marker.setMap(null)
+      }
+      this.markers = []
+    },
+    getCurrentRegions () {
       // 현재 지도에 보이는 영역
       const bounds = this.map.getBounds()
       const boundsGeoPolygon = {
@@ -132,42 +183,7 @@ export default {
           regionQueue.push(this.regionData[regionGeoPolygon.properties.SIG_CD])
         }
       }
-      // 지역 내 가맹점 데이터 요청
-      const shopData = []
-      for (const region of regionQueue) {
-        axios.get("http://devx.kr:9991/zeropay", {
-          params: {
-            sido: region.SIDO_CD,
-            sigungu: region.SIGUNGU_CD,
-            type: type
-          }
-        }).then((response) => {
-          shopData.push(response.data)
-
-          // 가맹점 좌표 데이터 요청
-          for (const shop of response.data) {
-            const centerLng = this.map.getCenter().lng()
-            const centerLat = this.map.getCenter().lat()
-            axios.get("http://devx.kr:9991/geocode", {
-              params: {
-                address: shop.shop_address,
-                coordinate: centerLng + "," + centerLat
-              }
-            }).then((response) => {
-              const addresses = response.data.addresses
-              if (typeof addresses !== "undefined" && addresses.length > 0) {
-                this.showMarker(shop.shop_name, addresses[0].y, addresses[0].x)
-              }
-            })
-          }
-        })
-      }
-    },
-    removeMarkers () {
-      for (const marker of this.markers) {
-        marker.setMap(null)
-      }
-      this.markers = []
+      return regionQueue
     }
   }
 }

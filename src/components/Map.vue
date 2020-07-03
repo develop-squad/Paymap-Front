@@ -123,7 +123,7 @@ export default {
         })
       }
     },
-    showMarkersByQuery (query) {
+    showMarkersByQuery (query, type) {
       this.removeMarkers()
       const regionQueue = this.getCurrentRegions()
       // 지역 내 가맹점 데이터 요청
@@ -132,7 +132,8 @@ export default {
           params: {
             sido: region.SIDO_CD,
             sigungu: region.SIGUNGU_CD,
-            name: query
+            name: query,
+            type: type
           }
         }).then(this.onShopDataResponse)
       }

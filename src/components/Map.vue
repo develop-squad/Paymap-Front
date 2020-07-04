@@ -83,23 +83,22 @@ export default {
         position: position
       })
       const infoWindow = new window.naver.maps.InfoWindow({
-        content: `<h4>${name}</h4>`,
+        content: `${name}`,
         minWidht: 100,
         maxWidth: 140,
         backgroundColor: "#eee",
-        borderColor: "#2db400",
-        borderWidth: 3,
+        borderColor: "#ddd",
+        borderWidth: 1,
         anchorSize: new window.naver.maps.Size(30, 30),
-        anchorSkew: true,
+        anchorSkew: false,
         anchorColor: "#eee",
         pixelOffset: new window.naver.maps.Point(20, -20)
       })
-      window.naver.maps.Event.addListener(marker, "click", e => {
-        if (infoWindow.getMap()) {
-          infoWindow.close()
-        } else {
-          infoWindow.open(this.map, marker)
-        }
+      window.naver.maps.Event.addListener(marker, "mouseover", e => {
+        infoWindow.open(this.map, marker)
+      })
+      window.naver.maps.Event.addListener(marker, "mouseout", e => {
+        infoWindow.close()
       })
       // this.map.setCenter(position)
       this.markers.push(marker)

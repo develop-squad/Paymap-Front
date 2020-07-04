@@ -80,47 +80,63 @@ export default {
       const position = new window.naver.maps.LatLng(lat, lng)
       const marker = new window.naver.maps.Marker({
         map: this.map,
-        position: position
+        position: position,
+        icon: {
+          content: [
+            "<img class=\"image-marker\" src=\"/statics/images/marker.png\"/>",
+            `<div class="label-marker">${name}</div>`
+          ].join(""),
+          size: new window.naver.maps.Size(20, 20)
+        }
       })
-      const infoWindow = new window.naver.maps.InfoWindow({
+      /* const infoWindow = new window.naver.maps.InfoWindow({
         content: `${name}`,
         minWidht: 100,
         maxWidth: 140,
         backgroundColor: "#eee",
         borderColor: "#ddd",
         borderWidth: 1,
-        anchorSize: new window.naver.maps.Size(30, 30),
+        anchorSize: new window.naver.maps.Size(0, 0),
         anchorSkew: false,
         anchorColor: "#eee",
-        pixelOffset: new window.naver.maps.Point(20, -20)
+        pixelOffset: new window.naver.maps.Point(0, 0)
       })
+      infoWindow.open(this.map, marker)
       window.naver.maps.Event.addListener(marker, "mouseover", e => {
         infoWindow.open(this.map, marker)
       })
       window.naver.maps.Event.addListener(marker, "mouseout", e => {
         infoWindow.close()
-      })
+      }) */
       // this.map.setCenter(position)
       this.markers.push(marker)
     },
     onShopDataResponse (response) {
       const centerLng = this.map.getCenter().lng()
       const centerLat = this.map.getCenter().lat()
+      const shopNames = []
+      let shopAddresses = ""
       for (const shop of response.data) {
-        // 가맹점 좌표 데이터 요청
-        axios.get("http://devx.kr:9991/geocode", {
-          params: {
-            address: shop.shop_address,
-            coordinate: centerLng + "," + centerLat
-          }
-        }).then((response) => {
-          const addresses = response.data.addresses
+        shopNames.push(shop.shop_name)
+        shopAddresses += shop.shop_address + "|"
+      }
+      shopAddresses = shopAddresses.substr(0, shopAddresses.length - 1)
+      // 가맹점 좌표 데이터 요청
+      axios.get("http://devx.kr:9991/geocode", {
+        params: {
+          address: shopAddresses,
+          coordinate: centerLng + "," + centerLat
+        }
+      }).then((response) => {
+        let i = 0
+        for (const datum of response.data) {
+          const addresses = datum.addresses
           if (typeof addresses !== "undefined" && addresses.length > 0) {
             // 마커 활성화
-            this.showMarker(shop.shop_name, addresses[0].y, addresses[0].x)
+            this.showMarker(shopNames[i++], addresses[0].y, addresses[0].x)
           }
-        })
-      }
+        }
+      })
     },
     showMarkersByQuery (query, type) {
       this.removeMarkers()

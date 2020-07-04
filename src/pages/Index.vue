@@ -47,6 +47,8 @@ export default {
 </script>
 
 <style lang="scss">
+$stroke-color: rgba(255, 255, 255, .5);
+
 .map {
   width: 100vw;
   display: flex;
@@ -84,6 +86,21 @@ export default {
   .control-wrapper {
     right: 4px !important;
     bottom: 15px !important;
+  }
+  .image-marker {
+    position: absolute;
+  }
+  .label-marker {
+    padding-top: 32px;
+    margin-left: calc(-50% + 16px);
+    margin-right: calc(50% - 16px);
+    white-space: nowrap;
+    color: #555;
+    text-shadow:
+      -1px -1px 0 $stroke-color,
+      1px -1px 0 $stroke-color,
+      -1px  1px 0 $stroke-color,
+      1px  1px 0 $stroke-color;
   }
 }
 </style>

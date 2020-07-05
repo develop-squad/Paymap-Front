@@ -5,7 +5,6 @@
 
 <script>
 import axios from "axios"
-import intersect from "@turf/intersect"
 
 export default {
   name: "Map",
@@ -33,9 +32,35 @@ export default {
         this.regionData[datum.LAWD_CD] = datum
       }
     })
-    axios.get("/statics/geodata/TL_SCCO_SIG.json").then((response) => {
+    axios.get("/statics/geodata/REGIONS.json").then((response) => {
       this.regionGeoData = response.data
     })
+    /* axios.get("/statics/geodata/TL_SCCO_SIG.json").then((response) => {
+      this.regionGeoData = response.data
+      const data = []
+      for (const regionGeoPolygon of this.regionGeoData.features) {
+        const code = regionGeoPolygon.properties.SIG_CD
+        const coordinates = regionGeoPolygon.geometry.coordinates[0]
+        const datum = {}
+        datum.code = code
+        datum.name = regionGeoPolygon.properties.SIG_KOR_NM
+        datum.lng = 0.0
+        datum.lat = 0.0
+        datum.radius = 0.0
+        for (const coordinate of coordinates) {
+          datum.lng += coordinate[0] / coordinates.length
+          datum.lat += coordinate[1] / coordinates.length
+        }
+        for (const coordinate of coordinates) {
+          const distance = this.getWGSDistance(datum.lat, datum.lng, coordinate[1], coordinate[0])
+          if (distance > datum.radius) {
+            datum.radius = distance
+          }
+        }
+        data.push(datum)
+      }
+      console.log(JSON.stringify(data))
+    }) */
     this.setCenterToGeolocation()
     this.drawMap()
     window.naver.maps.Event.once(this.map, "init_stylemap", this.mapInit)
@@ -116,27 +141,29 @@ export default {
       const centerLat = this.map.getCenter().lat()
       const shopNames = []
       let shopAddresses = ""
-      for (const shop of response.data) {
-        shopNames.push(shop.shop_name)
-        shopAddresses += shop.shop_address + "|"
-      }
-      shopAddresses = shopAddresses.substr(0, shopAddresses.length - 1)
-      // 가맹점 좌표 데이터 요청
-      axios.get("http://devx.kr:9991/geocode", {
-        params: {
-          address: shopAddresses,
-          coordinate: centerLng + "," + centerLat
+      if (response.data.length > 0) {
+        for (const shop of response.data) {
+          shopNames.push(shop.shop_name)
+          shopAddresses += shop.shop_address + "|"
         }
-      }).then((response) => {
-        let i = 0
-        for (const datum of response.data) {
-          const addresses = datum.addresses
-          if (typeof addresses !== "undefined" && addresses.length > 0) {
-            // 마커 활성화
-            this.showMarker(shopNames[i++], addresses[0].y, addresses[0].x)
+        shopAddresses = shopAddresses.substr(0, shopAddresses.length - 1)
+        // 가맹점 좌표 데이터 요청
+        axios.get("http://devx.kr:9991/geocode", {
+          params: {
+            address: shopAddresses,
+            coordinate: centerLng + "," + centerLat
           }
-        }
-      })
+        }).then((response) => {
+          let i = 0
+          for (const datum of response.data) {
+            const addresses = datum.addresses
+            if (typeof addresses !== "undefined" && addresses.length > 0) {
+              // 마커 활성화
+              this.showMarker(shopNames[i++], addresses[0].y, addresses[0].x)
+            }
+          }
+        })
+      }
     },
     showMarkersByQuery (query, type) {
       this.removeMarkers()
@@ -174,32 +201,31 @@ export default {
       this.markers = []
     },
     getCurrentRegions () {
-      // 현재 지도에 보이는 영역
-      const bounds = this.map.getBounds()
-      const boundsGeoPolygon = {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Polygon",
-          coordinates: [[
-            [bounds._min.x, bounds._min.y],
-            [bounds._max.x, bounds._min.y],
-            [bounds._max.x, bounds._max.y],
-            [bounds._min.x, bounds._max.y]
-          ]]
-        }
-      }
-      // 현재 지도에 보이는 지역(시/군/구)
+      const centerLng = this.map.getCenter().lng()
+      const centerLat = this.map.getCenter().lat()
+      const boundsLng = this.map.getBounds()._max._lng
+      const boundsLat = this.map.getBounds()._max._lat
+      const screenRadius = this.getWGSDistance(centerLat, centerLng, boundsLat, boundsLng)
       const regionQueue = []
-      let intersection
-      for (const regionGeoPolygon of this.regionGeoData.features) {
-        intersection = intersect(boundsGeoPolygon, regionGeoPolygon)
-        if (intersection !== null) {
-          console.log(regionGeoPolygon.properties.SIG_KOR_NM)
-          regionQueue.push(this.regionData[regionGeoPolygon.properties.SIG_CD])
+      for (const region of this.regionGeoData) {
+        if (this.getWGSDistance(centerLat, centerLng, region.lat, region.lng) <= region.radius + screenRadius) {
+          console.log(region.name)
+          regionQueue.push(this.regionData[region.code])
         }
       }
       return regionQueue
+    },
+    getWGSDistance (lat1, lng1, lat2, lng2) {
+      function deg2rad (deg) {
+        return deg * Math.PI / 180
+      }
+      var R = 6371
+      var dLat = deg2rad(lat2 - lat1)
+      var dLon = deg2rad(lng2 - lng1)
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+      var d = R * c
+      return d
     }
   }
 }

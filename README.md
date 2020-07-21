@@ -10,10 +10,7 @@
 
 ## 사용 예제 및 주요 기능
 
-<div style="width:80%; display:flex;">
-<img src="./src/assets/shot_01.png" style="width:50%; padding:10px;">
-<img src="./src/assets/shot_02.png" style="width:50%; padding:10px;">
-</div>
+![](./src/assets/shot_01.png)
 
 - 제로페이 가맹점 카테고리별 분류 기능
 - 가맹점 검색 기능

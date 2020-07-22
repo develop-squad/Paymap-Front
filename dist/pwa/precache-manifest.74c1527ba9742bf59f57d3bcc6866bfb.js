@@ -1,14 +1,14 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "37c725f2a912beb1c6f5",
+    "revision": "af39edf2b5f47992f933",
     "url": "css/2.423432db.css"
   },
   {
-    "revision": "d89c4524928c7e694555",
-    "url": "css/3.a99327f8.css"
+    "revision": "37c7d2ca90a233e2b680",
+    "url": "css/3.e49f4318.css"
   },
   {
-    "revision": "c5815b724f620413d67c",
+    "revision": "a4e71df8dd90f1906106",
     "url": "css/app.375ae869.css"
   },
   {
@@ -44,32 +44,56 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.12a47ed5.woff2"
   },
   {
-    "revision": "f42aa3d2d4a77f58d909b4a142c27ad5",
+    "revision": "36c70d2e7c209aa304b5ed90ca220ce7",
     "url": "index.html"
   },
   {
-    "revision": "37c725f2a912beb1c6f5",
-    "url": "js/2.37c725f2.js"
+    "revision": "af39edf2b5f47992f933",
+    "url": "js/2.af39edf2.js"
   },
   {
-    "revision": "d89c4524928c7e694555",
-    "url": "js/3.d89c4524.js"
+    "revision": "37c7d2ca90a233e2b680",
+    "url": "js/3.37c7d2ca.js"
   },
   {
     "revision": "a30d9da17762583981c4",
     "url": "js/4.a30d9da1.js"
   },
   {
-    "revision": "c5815b724f620413d67c",
-    "url": "js/app.09f0542e.js"
+    "revision": "a4e71df8dd90f1906106",
+    "url": "js/app.27317e90.js"
   },
   {
-    "revision": "45170f90a26a88ccd49a",
-    "url": "js/vendor.45170f90.js"
+    "revision": "f247021d732da216ca02",
+    "url": "js/vendor.f247021d.js"
   },
   {
     "revision": "54f237a127526db3385843e3d2d46962",
     "url": "manifest.json"
+  },
+  {
+    "revision": "294ca32fc912a5d95f5a3650ef7c62bd",
+    "url": "statics/geodata/LAWDCD.csv"
+  },
+  {
+    "revision": "d57be8367b97fc8ae38a18d6e9609ba5",
+    "url": "statics/geodata/LAWDCD.json"
+  },
+  {
+    "revision": "a75475346da2aeeabb085b43a83d403d",
+    "url": "statics/geodata/LAWDCD.xlsx"
+  },
+  {
+    "revision": "18f5f2d0f766d6d43471584b12403841",
+    "url": "statics/geodata/REGIONS.json"
+  },
+  {
+    "revision": "8d527f1de5405af3b387005725e60ac7",
+    "url": "statics/geodata/TL_SCCO_CTPRVN.json"
+  },
+  {
+    "revision": "4c75cbe45eb8703c75e25a483ede3c74",
+    "url": "statics/geodata/TL_SCCO_SIG.json"
   },
   {
     "revision": "86a4b2ef2db6b5c2d6edc1dbd23b3cfb",
@@ -126,5 +150,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "de8107bed7f087fb443d8e36855e7467",
     "url": "statics/icons/safari-pinned-tab.svg"
+  },
+  {
+    "revision": "9487d47c4852e116092ba2bacc73acaa",
+    "url": "statics/images/marker.png"
   }
 ]);

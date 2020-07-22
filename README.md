@@ -27,9 +27,9 @@ npm install
 quasar dev
 ```
 
-### 배포용 빌드 커맨드
+### PWA 배포용 빌드 커맨드
 ```bash
-quasar build
+quasar build -m pwa
 ```
 
 

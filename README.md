@@ -5,6 +5,7 @@
 ![version]
 
 제로페이 가맹점 데이터를 정렬하여, 사용자 친화적으로 보여주는 지도 서비스 입니다.
+Vue.js와 Quasar Framework를 사용하였으며, PWA 방식으로 개발하였습니다.
 
 ![](./src/statics/icons/icon-512x512.png)
 
@@ -42,5 +43,5 @@ Frontend Developer
 
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/datadog-metrics
-[version]: https://img.shields.io/badge/version-v1.0.11-blue
+[version]: https://img.shields.io/badge/version-v1.0.12-blue
 
